@@ -1,0 +1,21 @@
+{
+  "_id": "75on1PH4n4Wsj9qG",
+  "name": "Healing Potion",
+  "scope": "global",
+  "type": "script",
+  "img": "systems/pf2e/icons/equipment/consumables/potions/healing-potion.webp",
+  "command": "game.pf2eConvenientConsumables.postConsumableItem(\n    \"Healing Potion\",\n    \"Select a healing potion to consume.\",\n    {\n        slug: \"healing-potion-minor\",\n        description: \"1d8\"\n    },\n    {\n        slug: \"healing-potion-lesser\",\n        description: \"2d8+5\"\n    },\n    {\n        slug: \"healing-potion-moderate\",\n        description: \"3d8+10\"\n    },\n    {\n        slug: \"healing-potion-greater\",\n        description: \"6d8+20\"\n    },\n    {\n        slug: \"healing-potion-major\",\n        description: \"8d8+30\"\n    }\n);",
+  "folder": null,
+  "author": "6cYJNd43VitcuYqD",
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.3.2",
+    "coreVersion": "11.307",
+    "createdTime": 1692362642655,
+    "modifiedTime": 1692613300159
+  },
+  "_key": "!macros!75on1PH4n4Wsj9qG"
+}

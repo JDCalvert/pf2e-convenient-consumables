@@ -1,0 +1,21 @@
+{
+  "_id": "03R02ppgwh7cbGOc",
+  "name": "Acid Flask",
+  "scope": "global",
+  "type": "script",
+  "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/acid-flask.webp",  
+  "command": "game.pf2eConvenientConsumables.postConsumableWeapon(\n    \"Acid Flask\",\n    \"Select an acid flask to use.\",\n    {\n        slug: \"acid-flask-lesser\",\n        description: '1 <i class=\"fa-solid fa-burst\"></i> + 1d6 <i class=\"fa-duotone fa-hourglass\"></i>'\n    },\n    {\n        slug: \"acid-flask-moderate\",\n        description: '+1; 2 <i class=\"fa-solid fa-burst\"></i> + 2d6 <i class=\"fa-duotone fa-hourglass\"></i>'\n    },\n    {\n        slug: \"acid-flask-greater\",\n        description: '+2; 3 <i class=\"fa-solid fa-burst\"></i> + 3d6 <i class=\"fa-duotone fa-hourglass\"></i>'\n    },\n    {\n        slug: \"acid-flask-major\",\n        description: '+3; 4 <i class=\"fa-solid fa-burst\"></i> + 4d6 <i class=\"fa-duotone fa-hourglass\"></i>'\n    }\n);",
+  "folder": null,
+  "author": "6cYJNd43VitcuYqD",
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.3.2",
+    "coreVersion": "11.307",
+    "createdTime": 1692614120684,
+    "modifiedTime": 1692614235007
+  },
+  "_key": "!macros!03R02ppgwh7cbGOc"
+}

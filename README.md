@@ -32,7 +32,12 @@ This is a list of the variants you want to choose from. Each choice consists of 
 - <strong>description</strong> (e.g. `"1d6"`) This is additional information that may be useful for choosing an item, such as how much damage this variant does.
 
 #### Example
-The module comes bundled with a few example macros `Elixir of Life` and `Healing Potion` which show how to use the functions.
+The module comes bundled with a few macros for:
+- Elixirs of Life
+- Healing Potions
+- Each of the common alchemical bombs from the Core Rulebook
+
+You can use these macros as a basis for your own macros!
 
 ```
 game.pf2eConvenientConsumables.postConsumableItem(

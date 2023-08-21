@@ -1,0 +1,21 @@
+{
+  "_id": "2BGM8x0ujtyajgiY",
+  "name": "Thunderstone",
+  "scope": "global",
+  "type": "script",
+  "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/thunderstone.webp",
+  "command": "game.pf2eConvenientConsumables.postConsumableWeapon(\n    \"Thunderstone\",\n    \"Select a thunderstone to use.\",\n    {\n        slug: \"thunderstone-lesser\",\n        description: '1d4 + 1 <i class=\"fa-solid fa-burst\"></i>; DC 17'\n    },\n    {\n        slug: \"thunderstone-moderate\",\n        description: '+1; 2d4 + 2 <i class=\"fa-solid fa-burst\"></i>; DC 20'\n    },\n    {\n        slug: \"thunderstone-greater\",\n        description: '+2; 3d4 + 3 <i class=\"fa-solid fa-burst\"></i>; DC 28'\n    },\n    {\n        slug: \"thunderstone-major\",\n        description: '+3; 4d4 + 4 <i class=\"fa-solid fa-burst\"></i>; DC 36'\n    }\n);",
+  "folder": null,
+  "author": "6cYJNd43VitcuYqD",
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.3.2",
+    "coreVersion": "11.307",
+    "createdTime": 1692614289319,
+    "modifiedTime": 1692614535859
+  },
+  "_key": "!macros!2BGM8x0ujtyajgiY"
+}

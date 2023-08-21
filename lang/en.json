@@ -1,0 +1,18 @@
+{
+    "pf2e-convenient-consumables": {
+        "utils": {
+            "actor": {
+                "singleCharacterSelected": "You must have a single character selected."
+            },
+            "carryType": {
+                "held": "Held",
+                "worn": "Worn",
+                "stowed": "Stowed",
+                "dropped": "Dropped"
+            }
+        },
+        "items": {
+            "noMatchingItems": "{actor} does not have any matching items."
+        }
+    }
+}
