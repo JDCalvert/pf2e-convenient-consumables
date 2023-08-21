@@ -1,0 +1,21 @@
+{
+  "_id": "xCjRWQfdN5uJuXbU",
+  "name": "Elixir of Life",
+  "scope": "global",
+  "type": "script",
+  "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-elixirs/elixir-of-life.webp",
+  "command": "game.pf2eConvenientConsumables.postConsumableItem(\n    \"Elixir of Life\",\n    \"Select an elixir of life to consume.\",\n    {\n        slug: \"elixir-of-life-minor\",\n        description: \"1d6; +1\"\n    },\n    {\n        slug: \"elixir-of-life-lesser\",\n        description: \"3d6+6; +1\"\n    },\n    {\n        slug: \"elixir-of-life-moderate\",\n        description: \"5d6+12; +2\"\n    },\n    {\n        slug: \"elixir-of-life-greater\",\n        description: \"7d6+18; +2\"\n    },\n    {\n        slug: \"elixir-of-life-major\",\n        description: \"8d6+21; +3\"\n    },\n    {\n        slug: \"elixir-of-life-true\",\n        description: \"10d6+27; +3\"\n    }\n);",
+  "folder": null,
+  "author": "6cYJNd43VitcuYqD",
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.3.2",
+    "coreVersion": "11.307",
+    "createdTime": 1692355182132,
+    "modifiedTime": 1692613300159
+  },
+  "_key": "!macros!xCjRWQfdN5uJuXbU"
+}

@@ -6,6 +6,9 @@ export class Actor {
 export class ItemTypes {
     /** @type Consumable[] */
     consumable;
+    
+    /** @type Consumable{} */
+    weapon;
 }
 
 export class Consumable {
@@ -23,6 +26,9 @@ export class Consumable {
 
     /** @type ConsumableSystem */
     system;
+
+    /** @type boolean */
+    isEquipped;
 }
 
 class ConsumableSystem {

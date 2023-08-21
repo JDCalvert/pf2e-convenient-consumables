@@ -32,6 +32,24 @@
     "styles": [
         "styles/pf2e-convenient-consumables.css"
     ],
+    "packs": [
+        {
+            "name": "macros",
+            "label": "Convenient Consumable Macros",
+            "path": "packs/macros",
+            "type": "Macro",
+            "system": "pf2e"
+        }
+    ],
+    "packFolders": [
+        {
+            "name": "PF2e Convenient Consumables",
+            "sorting": "a",
+            "packs": [
+                "macros"
+            ]
+        }
+    ],
     "media": [
         {
             "type": "setup",

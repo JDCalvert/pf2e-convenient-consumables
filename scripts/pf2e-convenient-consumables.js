@@ -1,5 +1,4 @@
-import { postConsumableItem } from "./items/consumable.js";
-import { postConsumableWeapon } from "./items/weapon.js";
+import { postConsumableItem, postConsumableWeapon } from "./items/consumable.js";
 
 Hooks.on(
     "init",

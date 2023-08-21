@@ -1,0 +1,21 @@
+{
+  "_id": "dRZCJVbRNI29ijPI",
+  "name": "Bottled Lightning",
+  "scope": "global",
+  "type": "script",
+  "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/bottled-lightning.webp",
+  "command": "game.pf2eConvenientConsumables.postConsumableWeapon(\n    \"Bottled Lightning\",\n    \"Select a bottled lightning to use.\",\n    {\n        slug: \"bottled-lightning-lesser\",\n        description: '1d6 + 1 <i class=\"fa-solid fa-burst\"></i>'\n    },\n    {\n        slug: \"bottled-lightning-moderate\",\n        description: '+1; 2d6 + 2 <i class=\"fa-solid fa-burst\"></i>'\n    },\n    {\n        slug: \"bottled-lightning-greater\",\n        description: '+2; 3d6 + 3 <i class=\"fa-solid fa-burst\"></i>'\n    },\n    {\n        slug: \"bottled-lightning-major\",\n        description: '+3; 4d6 + 4 <i class=\"fa-solid fa-burst\"></i>'\n    }\n);",
+  "folder": null,
+  "author": "6cYJNd43VitcuYqD",
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.3.2",
+    "coreVersion": "11.307",
+    "createdTime": 1692613376020,
+    "modifiedTime": 1692613530630
+  },
+  "_key": "!macros!dRZCJVbRNI29ijPI"
+}

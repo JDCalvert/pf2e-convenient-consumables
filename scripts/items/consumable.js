@@ -2,6 +2,7 @@ import { getControlledActor } from "../utils/actor.js";
 import { ItemSelectDialog, Section, Choice } from "../utils/item-select-dialog.js";
 import { format, localize, showWarning } from "../utils/utils.js";
 import { Consumable } from "../types/actor.js";
+import { Actor } from "../types/actor.js";
 
 class ChoiceItem {
     /** @type string */
@@ -12,27 +13,90 @@ class ChoiceItem {
 }
 
 /**
- * Find the instances of the alchemical items in the actor's inventory, allow the player to
- * choose one, and then post and consume it.
- * 
- * If there are multiple stacks of the same item, then select one, prioritising infused
- * and equipped stacks.
+ * Find and post a matching consumable from the selected actor's inventory.
  * 
  * @param {string} title The title to display on the choices dialog
  * @param {string} header The header to display on the choices dialog
  * @param {...ChoiceItem} choices The slugs of the alchemical items to filter on
  */
 export async function postConsumableItem(title, header, ...choices) {
-    const actor = getControlledActor();
-    if (!actor) {
+    const { item } = await chooseConsumable(title, header, choices, actor => actor.itemTypes.consumable);
+    if (!item) {
         return;
     }
 
+    await game.pf2e.rollItemMacro(item.id);
+    item.consume();
+}
+
+/**
+ * Find and post a matching weapon from the selected actor's inventory.
+ * 
+ * @param {string} title The title to display on the choices dialog
+ * @param {string} header The header to display on the choices dialog
+ * @param {...ChoiceItem} choices The slugs of the alchemical items to filter on
+ */
+export async function postConsumableWeapon(title, header, ...choices) {
+    const { actor, item } = await chooseConsumable(title, header, choices, actor => actor.itemTypes.weapon);
+    if (!actor || !item) {
+        return;
+    }
+
+
+    if (item.isEquipped) {
+        // The weapon is already equipped, so just roll the action macro
+        game.pf2e.rollActionMacro(item.id, 0, item.slug);
+    } else {
+        // The weapon isn't drawn, so draw it now
+        const action = actor.system.actions
+            .find(action => action.item.id === item.id)
+            ?.auxiliaryActions
+            ?.find(action => action.carryType === "held");
+        if (action) {
+            await action.execute();
+        }
+    }
+
+    setTimeout(
+        () => {
+            // Now we've drawn the weapon, we need to find the drawn version and roll its action macro
+            const updatedActor = getControlledActor();
+            const weapon = updatedActor.itemTypes.weapon.find(weapon => weapon.isEquipped && weapon.slug == item.slug && isInfused(weapon) === isInfused(item));
+            if (!weapon) {
+                return;
+            }
+
+            game.pf2e.rollActionMacro(weapon.id, 0, weapon.slug);
+        },
+        250
+    );
+}
+
+/**
+ * Find the instances of the alchemical items (type defined by the consumablesFunction parameter) in the actor's
+ * inventory, allow the player to choose one, and then return it.
+ * 
+ * If there are multiple stacks of the same item, then select one, prioritising infused
+ * and equipped stacks.
+ * 
+ * @param {string} title The title to display on the choices dialog
+ * @param {string} header The header to display on the choices dialog
+ * @param {ChoiceItem[]} choices The choices of items to display
+ * @param {function(Actor): Consumable[]} consumablesFunction The function to get to the correct category of 
+ * @returns {Promise<{actor: Actor, item: Consumable}>}
+ */
+async function chooseConsumable(title, header, choices, consumablesFunction) {
+    const actor = getControlledActor();
+    if (!actor) {
+        return {};
+    }
+
     const allSlugs = choices.map(choice => choice.slug);
-    const matchingConsumables = actor.itemTypes.consumable.filter(consumable => allSlugs.includes(consumable.slug) && consumable.quantity);
+
+    const matchingConsumables = consumablesFunction(actor).filter(consumable => allSlugs.includes(consumable.slug) && consumable.quantity);
     if (!matchingConsumables.length) {
         showWarning(format("items.noMatchingItems", { actor: actor.name }));
-        return;
+        return {};
     }
 
     /** @type Map<string, {choice: ChoiceItem, consumables: Consumable[]}> */
@@ -79,13 +143,13 @@ export async function postConsumableItem(title, header, ...choices) {
 
     const selected = await ItemSelectDialog.getItem(title, header, itemSelectSections);
     if (!selected) {
-        return;
+        return {};
     }
 
-    const item = selected.item;
-    
-    await item.toMessage();    
-    item.consume();
+    return {
+        actor: actor,
+        item: selected.item
+    };
 }
 
 /**
@@ -180,7 +244,7 @@ function calculateScore(consumable) {
     } else if (carryType === "worn") {
         score += 3;
     } else if (carryType === "stowed") {
-        score += 2
+        score += 2;
     } else if (carryType === "dropped") {
         score += 1;
     }
