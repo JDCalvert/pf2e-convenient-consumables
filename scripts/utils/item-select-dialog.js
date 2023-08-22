@@ -30,7 +30,7 @@ export class Choice {
     /** @type string */
     name;
 
-    /** @type {{top: string, bottom: string}} */
+    /** @type string[] */
     info;
 
     /** @type string */
@@ -83,8 +83,7 @@ export class ItemSelectDialog extends Dialog {
      */
     static async getItem(title, header, sections) {
         let content = `
-            <div class="item-buttons" style="min-width: 200px; max-width: max-content; justify-items: center; margin: auto;">
-            <p style="width: 200px; min-width: 100%">${header}</p>
+                <p>${header}</p>
         `;
 
         for (const section of sections) {
@@ -97,7 +96,7 @@ export class ItemSelectDialog extends Dialog {
                     <legend>${section.heading}</legend>
             `;
 
-            for (let choice of section.choices) {
+            for (const choice of section.choices) {
                 content += `
                     <button
                         class="pf2e-convenient-consumables item-button"
@@ -106,41 +105,39 @@ export class ItemSelectDialog extends Dialog {
                     >
                         <img class="pf2e-convenient-consumables" src="${choice.img}"/>
                         <table class="pf2e-convenient-consumables" style="background-color: #00000000; border: none">
-                                <tr>
-                                    <td rowspan="2">
-                                        <span class="pf2e-convenient-consumables name">${choice.name}</span>
-                                    </td>
+                            <tr>
+                                <td class="pf2e-convenient-consumables name" rowspan="${choice.info.length || 1}">
+                                    <span>${choice.name}</span>
+                                </td>
                 `;
-                if (choice.info.top) {
+
+                for (let i = 0; i < choice.info.length; i++) {
+                    if (i > 0) {
+                        content += `
+                            </tr>
+                            <tr>
+                        `;
+                    }
                     content += `
-                                    <td class="pf2e-convenient-consumables description" style="text-align: right;">
-                                        <span>${choice.info.top ?? ""}</span>
-                                    </td>
+                                <td class="pf2e-convenient-consumables description">
+                                    <span>${choice.info[i]}</span>
+                                </td>
                     `;
                 }
+                content += `
+                            </tr>
+                `;
 
                 content += `
-                                </tr>
-                `;
-                if (choice.info.bottom) {
-                    content += `
-                                <tr>
-                                    <td class="pf2e-convenient-consumables description" style="text-align: right;">
-                                        <span>${choice.info.bottom}</span>
-                                    </td>
-                                </tr >
-                `;
-                }
-                content += `
-                        </table >
-                    </button >
+                        </table>
+                    </button>
                 `;
             }
 
-            content += `</fieldset > `;
+            content += `
+                </fieldset>
+            `;
         }
-
-        content += `</div > `;
 
         const itemSelectDialog = new this(title, content);
 

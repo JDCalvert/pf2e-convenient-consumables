@@ -181,10 +181,10 @@ function findCandidates(choice) {
             new Choice(
                 infused.consumable.id,
                 infused.consumable.name,
-                {
-                    top: choice.choice.description,
-                    bottom: "Infused"
-                },
+                [
+                    choice.choice.description,
+                    "Infused"
+                ],
                 infused.consumable.img,
                 infused.consumable
             )
@@ -197,9 +197,9 @@ function findCandidates(choice) {
             new Choice(
                 nonInfused.consumable.id,
                 nonInfused.consumable.name,
-                {
-                    top: choice.choice.description
-                },
+                [
+                    choice.choice.description
+                ],
                 nonInfused.consumable.img,
                 nonInfused.consumable
             )

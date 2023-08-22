@@ -1,37 +1,38 @@
-.pf2e-convenient-consumables {
+.pf2e-convenient-consumables {    
     .name {
+        text-align: left;
         white-space: nowrap;
     }
 
     .description {
+        color: #666666;
         font-size: 75%;
         font-weight: 600;
-        white-space: nowrap;
         padding-inline: 0.5em;
-        color: #666666;
+        text-align: right;
+        white-space: nowrap;
     }
 
     .table,
     th,
     td {
-        padding: 0px;
         line-height: 1em;
-        text-align: left;
+        padding: 0px;
         width: 100%;
     }
 }
 
 button.pf2e-convenient-consumables {
-    display: flex;
     align-items: center;
+    display: flex;
     margin: 4px auto;
     padding: 2px;
 }
 
 img.pf2e-convenient-consumables {
     border: 1px solid #444;
-    margin-right: 0.5em;
     height: 2.5em;
+    margin-right: 0.5em;
 }
 
 fieldset.pf2e-convenient-consumables {
