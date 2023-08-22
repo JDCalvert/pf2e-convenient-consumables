@@ -15,6 +15,9 @@ What do we mean by "best"? Generally, you'll want to use the most-accessible con
 
 For example, if you're holding a minor elixir of life in your hand, you have another minor elixir of life (not infused) on your belt, and you have a lesser elixir of life on your belt, we'll display all three, but if all three are on your belt, then we'll only display the infused minor elixir of life and the lesser elixir of life.
 
+![image](art/elixir-of-life.webp)
+![image](art/alchemists-fire.webp)
+
 #### Using the Function
 The function takes the following parameters:
 
