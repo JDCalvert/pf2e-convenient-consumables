@@ -45,7 +45,7 @@ export async function postConsumableWeapon(title, header, ...choices) {
 
     if (item.isEquipped) {
         // The weapon is already equipped, so just roll the action macro
-        game.pf2e.rollActionMacro(item.id, 0, item.slug);
+        game.pf2e.rollActionMacro({ actorUUID: "Actor:" + updatedActor.id, type: "strike", itemId: item.id, slug: item.slug });
     } else {
         // The weapon isn't drawn, so draw it now
         const action = actor.system.actions
@@ -66,7 +66,7 @@ export async function postConsumableWeapon(title, header, ...choices) {
                 return;
             }
 
-            game.pf2e.rollActionMacro(weapon.id, 0, weapon.slug);
+            game.pf2e.rollActionMacro({ actorUUID: "Actor:" + updatedActor.id, type: "strike", itemId: weapon.id, slug: weapon.slug });
         },
         250
     );
