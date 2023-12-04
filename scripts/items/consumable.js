@@ -41,35 +41,7 @@ export async function postConsumableWeapon(title, header, ...choices) {
     if (!actor || !item) {
         return;
     }
-
-
-    if (item.isEquipped) {
-        // The weapon is already equipped, so just roll the action macro
-        game.pf2e.rollActionMacro(item.id, 0, item.slug);
-    } else {
-        // The weapon isn't drawn, so draw it now
-        const action = actor.system.actions
-            .find(action => action.item.id === item.id)
-            ?.auxiliaryActions
-            ?.find(action => action.carryType === "held");
-        if (action) {
-            await action.execute();
-        }
-    }
-
-    setTimeout(
-        () => {
-            // Now we've drawn the weapon, we need to find the drawn version and roll its action macro
-            const updatedActor = getControlledActor();
-            const weapon = updatedActor.itemTypes.weapon.find(weapon => weapon.isEquipped && weapon.slug == item.slug && isInfused(weapon) === isInfused(item));
-            if (!weapon) {
-                return;
-            }
-
-            game.pf2e.rollActionMacro(weapon.id, 0, weapon.slug);
-        },
-        250
-    );
+    game.pf2e.rollActionMacro({ actorUUID: "Actor." + actor.id, type: "strike", itemId: item.id, slug: item.slug });
 }
 
 /**
