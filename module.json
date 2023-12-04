@@ -54,7 +54,7 @@
         {
             "type": "setup",
             "caption": "PF2e Ranged Combat",
-            "thumbnail": "/modules/pf2e-convenient-consumables/art/thumbnail.webp"
+            "thumbnail": "modules/pf2e-convenient-consumables/art/thumbnail.webp"
         }
     ],
     "languages": [

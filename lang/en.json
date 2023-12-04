@@ -1,5 +1,11 @@
 {
     "pf2e-convenient-consumables": {
+        "config": {
+            "drawConsumableWeapon": {
+                "name": "Draw Consumable Weapon",
+                "hint": "Automatically draw a consumable weapon when you select it using this module."
+            }
+        },
         "utils": {
             "actor": {
                 "singleCharacterSelected": "You must have a single character selected."

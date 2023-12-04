@@ -41,7 +41,30 @@ export async function postConsumableWeapon(title, header, ...choices) {
     if (!actor || !item) {
         return;
     }
-    game.pf2e.rollActionMacro({ actorUUID: "Actor." + actor.id, type: "strike", itemId: item.id, slug: item.slug });
+
+    game.pf2e.rollActionMacro(
+        {
+            actorUUID: "Actor." + actor.id,
+            type: "strike",
+            itemId: item.id,
+            slug: item.slug,
+        }
+    );
+
+    // If the weapon isn't drawn, draw it
+    if (!item.isEquipped && game.settings.get("pf2e-convenient-consumables", "drawConsumableWeapon")) {
+        const action = actor.system.actions
+            .find(action => action.item.id === item.id)
+            ?.auxiliaryActions
+            ?.find(action => action.carryType === "held");
+
+        if (!action) {
+            ui.notifications.error(format("items.couldNotEquip", { item: item.name }));
+            return;
+        }
+
+        action.execute();
+    }
 }
 
 /**
@@ -155,7 +178,8 @@ function findCandidates(choice) {
                 infused.consumable.name,
                 [
                     choice.choice.description,
-                    "Infused"
+                    "Infused",
+                    "x" + infused.consumable.quantity,
                 ],
                 infused.consumable.img,
                 infused.consumable
@@ -170,7 +194,8 @@ function findCandidates(choice) {
                 nonInfused.consumable.id,
                 nonInfused.consumable.name,
                 [
-                    choice.choice.description
+                    choice.choice.description,
+                    "x" + nonInfused.consumable.quantity,
                 ],
                 nonInfused.consumable.img,
                 nonInfused.consumable
