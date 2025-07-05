@@ -2,7 +2,7 @@
     "id": "pf2e-convenient-consumables",
     "title": "PF2e Convenient Consumables",
     "description": "A module for Pathfinder Second Edition to allow quick selection and use of consumables through the use of macros.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "authors": [
         {
             "name": "JDCalvert"
@@ -10,7 +10,7 @@
     ],
     "compatibility": {
         "minimum": "11",
-        "verified": "11"
+        "verified": "13"
     },
     "relationships": {
         "systems": [
@@ -18,11 +18,17 @@
                 "id": "pf2e",
                 "type": "system"
             }
+        ],
+        "requires": [
+            {
+                "id": "lib-item-select-dialog",
+                "type": "module"
+            }
         ]
     },
     "url": "https://github.com/JDCalvert/pf2e-convenient-consumables",
     "manifest": "https://github.com/JDCalvert/pf2e-convenient-consumables/releases/latest/download/module.json",
-    "download": "https://github.com/JDCalvert/pf2e-convenient-consumables/archive/1.0.1.zip",
+    "download": "https://github.com/JDCalvert/pf2e-convenient-consumables/releases/download/1.0.2/pf2e-convenient-consumables.zip",
     "readme": "https://github.com/JDCalvert/pf2e-convenient-consumables",
     "bugs": "https://github.com/JDCalvert/pf2e-convenient-consumables/issues",
     "changelog": "https://github.com/JDCalvert/pf2e-convenient-consumables/blob/main/CHANGELOG.md",

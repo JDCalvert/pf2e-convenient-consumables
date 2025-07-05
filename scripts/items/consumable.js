@@ -1,5 +1,5 @@
 import { getControlledActor } from "../utils/actor.js";
-import { ItemSelectDialog, Section, Choice } from "../utils/item-select-dialog.js";
+import * as ItemSelect from "../../../lib-item-select-dialog/scripts/item-select-dialog.js";
 import { format, localize, showWarning } from "../utils/utils.js";
 import { Consumable } from "../types/actor.js";
 import { Actor } from "../types/actor.js";
@@ -107,13 +107,13 @@ async function chooseConsumable(title, header, choices, consumablesFunction) {
         );
     }
 
-    /** @type Map<string, Section<Consumable> */
+    /** @type Map<string, ItemSelect.Section<Consumable> */
     const sections = new Map(
         [
-            ["held", new Section(localize("utils.carryType.held"))],
-            ["worn", new Section(localize("utils.carryType.worn"))],
-            ["stowed", new Section(localize("utils.carryType.stowed"))],
-            ["dropped", new Section(localize("utils.carryType.dropped"))]
+            ["held", new ItemSelect.Section("utils.carryType.held")],
+            ["worn", new ItemSelect.Section(localize("utils.carryType.worn"))],
+            ["stowed", new ItemSelect.Section(localize("utils.carryType.stowed"))],
+            ["dropped", new ItemSelect.Section(localize("utils.carryType.dropped"))]
         ]
     );
 
@@ -128,7 +128,7 @@ async function chooseConsumable(title, header, choices, consumablesFunction) {
         section.choices.sort((choice1, choice2) => choice1.item.level - choice2.item.level);
     }
 
-    /** @type Section<Consumable>[] */
+    /** @type ItemSelect.Section<Consumable>[] */
     const itemSelectSections = [
         sections.get("held"),
         sections.get("worn"),
@@ -136,14 +136,20 @@ async function chooseConsumable(title, header, choices, consumablesFunction) {
         sections.get("dropped")
     ];
 
-    const selected = await ItemSelectDialog.getItem(title, header, itemSelectSections);
+    const selected = await ItemSelect.getItem(
+        {
+            title,
+            heading: header,
+            sections: itemSelectSections,
+        }
+    );
     if (!selected) {
         return {};
     }
 
     return {
         actor: actor,
-        item: selected.item
+        item: selected.choice.item
     };
 }
 
@@ -173,7 +179,7 @@ function findCandidates(choice) {
     const infused = findBest(choice.consumables.filter(consumable => isInfused(consumable)));
     if (infused.consumable) {
         candidates.push(
-            new Choice(
+            new ItemSelect.Choice(
                 infused.consumable.id,
                 infused.consumable.name,
                 [
@@ -190,7 +196,7 @@ function findCandidates(choice) {
     const nonInfused = findBest(choice.consumables.filter(consumable => !isInfused(consumable)));
     if (nonInfused.score > infused.score) {
         candidates.push(
-            new Choice(
+            new ItemSelect.Choice(
                 nonInfused.consumable.id,
                 nonInfused.consumable.name,
                 [
