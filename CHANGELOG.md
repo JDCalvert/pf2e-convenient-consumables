@@ -1,3 +1,6 @@
+## 1.0.3 - 2025-07-07 (Pathfinder 2e 7.2.2)
+- Fix issue with Item Select Dialog.
+
 ## 1.0.2 - 2025-07-05 (Pathfinder 2e 7.2.2)
 ### Under the Hood
 - Refactored Item Select Dialog into library module.

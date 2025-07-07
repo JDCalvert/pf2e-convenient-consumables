@@ -6,4 +6,4 @@ rm -r packs
 
 fvtt package pack macros --in packs-source/macros --out packs
 
-7z u pf2e-convenient-consumables.zip -uq0 art/ lang/ packs/ scripts/ styles/ CHANGELOG.md module.json README.md
+7z u pf2e-convenient-consumables.zip -uq0 art/ lang/ lib/ packs/ scripts/ styles/ CHANGELOG.md module.json README.md

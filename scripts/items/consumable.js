@@ -1,8 +1,8 @@
-import { getControlledActor } from "../utils/actor.js";
 import * as ItemSelect from "../../../lib-item-select-dialog/scripts/item-select-dialog.js";
+import { Choice, Section } from "../../lib/lib-item-select-dialog-types/types.js";
+import { Actor, Consumable } from "../types/actor.js";
+import { getControlledActor } from "../utils/actor.js";
 import { format, localize, showWarning } from "../utils/utils.js";
-import { Consumable } from "../types/actor.js";
-import { Actor } from "../types/actor.js";
 
 class ChoiceItem {
     /** @type string */
@@ -107,13 +107,13 @@ async function chooseConsumable(title, header, choices, consumablesFunction) {
         );
     }
 
-    /** @type Map<string, ItemSelect.Section<Consumable> */
+    /** @type Map<string, Section<Consumable> */
     const sections = new Map(
         [
-            ["held", new ItemSelect.Section("utils.carryType.held")],
-            ["worn", new ItemSelect.Section(localize("utils.carryType.worn"))],
-            ["stowed", new ItemSelect.Section(localize("utils.carryType.stowed"))],
-            ["dropped", new ItemSelect.Section(localize("utils.carryType.dropped"))]
+            ["held", new Section("utils.carryType.held")],
+            ["worn", new Section(localize("utils.carryType.worn"))],
+            ["stowed", new Section(localize("utils.carryType.stowed"))],
+            ["dropped", new Section(localize("utils.carryType.dropped"))]
         ]
     );
 
@@ -128,7 +128,7 @@ async function chooseConsumable(title, header, choices, consumablesFunction) {
         section.choices.sort((choice1, choice2) => choice1.item.level - choice2.item.level);
     }
 
-    /** @type ItemSelect.Section<Consumable>[] */
+    /** @type Section<Consumable>[] */
     const itemSelectSections = [
         sections.get("held"),
         sections.get("worn"),
@@ -136,7 +136,7 @@ async function chooseConsumable(title, header, choices, consumablesFunction) {
         sections.get("dropped")
     ];
 
-    const selected = await ItemSelect.getItem(
+    const selected = await CONFIG.itemSelectDialog.getItem(
         {
             title,
             heading: header,
@@ -179,16 +179,16 @@ function findCandidates(choice) {
     const infused = findBest(choice.consumables.filter(consumable => isInfused(consumable)));
     if (infused.consumable) {
         candidates.push(
-            new ItemSelect.Choice(
+            new Choice(
                 infused.consumable.id,
                 infused.consumable.name,
+                infused.consumable.img,
+                infused.consumable,
                 [
                     choice.choice.description,
                     "Infused",
                     "x" + infused.consumable.quantity,
-                ],
-                infused.consumable.img,
-                infused.consumable
+                ]
             )
         );
     }
@@ -196,15 +196,15 @@ function findCandidates(choice) {
     const nonInfused = findBest(choice.consumables.filter(consumable => !isInfused(consumable)));
     if (nonInfused.score > infused.score) {
         candidates.push(
-            new ItemSelect.Choice(
+            new Choice(
                 nonInfused.consumable.id,
                 nonInfused.consumable.name,
+                nonInfused.consumable.img,
+                nonInfused.consumable,
                 [
                     choice.choice.description,
                     "x" + nonInfused.consumable.quantity,
-                ],
-                nonInfused.consumable.img,
-                nonInfused.consumable
+                ]
             )
         );
     }

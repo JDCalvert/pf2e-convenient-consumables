@@ -2,7 +2,7 @@
 Welcome to Convenient Consumables, a module for the Foundry VTT Pathfinder Second Edition system to help you find the consumable you need, now!
 
 ![Github All Releases](https://img.shields.io/github/downloads/JDCalvert/pf2e-convenient-consumables/total.svg)
-![Github Latest Release](https://img.shields.io/github/downloads/JDCalvert/pf2e-convenient-consumables/1.0.2/total)
+![Github Latest Release](https://img.shields.io/github/downloads/JDCalvert/pf2e-convenient-consumables/1.0.3/total)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/jdcalvert)
 
